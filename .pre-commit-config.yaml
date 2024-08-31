@@ -1,5 +1,16 @@
 repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0  # Use the ref you want to point at
+    hooks:
+    - id: trailing-whitespace
+    - id: check-yaml
+    - id: pretty-format-json
+    - id: end-of-file-fixer
 - repo: https://github.com/antonbabenko/pre-commit-terraform
   rev: v1.94.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
   hooks:
+    - id: terraform_validate
     - id: terraform_fmt
+    - id: terraform_tflint
+    - id: terraform_docs
+    - id: terraform_providers_lock
