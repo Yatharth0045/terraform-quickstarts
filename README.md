@@ -48,3 +48,12 @@ tf init
 tf graph
 tf graph | dot -Tsvg > graph.svg
 ```
+
+## Meta-arguments: `count` and `for_each`
+
+```bash
+cd meta_arguments
+tf init
+tf plan
+tf apply
+```
