@@ -17,3 +17,22 @@ output "filenames" {
   value     = local_file.file
   sensitive = true
 }
+
+resource "local_file" "file_new" {
+  for_each = toset(var.filename_set)
+  filename = "./files/${each.value}"
+  content  = "This is my file name ${each.value}\n"
+}
+
+variable "filename_set" {
+  type = list(string)
+  default = [
+    "fileA.txt",
+    "fileB.txt"
+  ]
+}
+
+output "filenames_set" {
+  value     = local_file.file_new
+  sensitive = true
+}
