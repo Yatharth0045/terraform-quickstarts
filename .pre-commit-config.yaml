@@ -5,6 +5,11 @@ repos:
     - id: trailing-whitespace
     - id: check-yaml
     - id: check-json
+    - id: pretty-format-json
+      args:
+      - --autofix
+      - --indent=4
+      - --no-sort-keys
     - id: end-of-file-fixer
 - repo: https://github.com/antonbabenko/pre-commit-terraform
   rev: v1.94.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
