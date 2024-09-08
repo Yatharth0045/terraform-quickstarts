@@ -28,6 +28,6 @@ module "vpc" {
 
 module "ec2" {
   source    = "./modules/ec2"
-  subnet_id = module.vpc.subnet_ids.public-subnet-a
+  subnet_id = module.vpc.subnet_ids.my-public-subnet-a
   tags      = local.tags
 }
