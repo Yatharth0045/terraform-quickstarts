@@ -1,3 +1,4 @@
+## Count
 resource "local_file" "file" {
   count    = length(var.filename)
   filename = "./files/${var.filename[count.index]}"
@@ -18,6 +19,7 @@ output "filenames" {
   sensitive = true
 }
 
+## For_each
 resource "local_file" "file_new" {
   for_each = toset(var.filename_set)
   filename = "./files/${each.value}"

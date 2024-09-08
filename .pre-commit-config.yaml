@@ -11,6 +11,8 @@ repos:
   hooks:
     - id: terraform_validate
     - id: terraform_fmt
+      args:
+      - --args=-diff
     - id: terraform_tflint
     - id: terraform_docs
     - id: terraform_providers_lock

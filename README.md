@@ -57,3 +57,54 @@ tf init
 tf plan
 tf apply
 ```
+
+## VPC Infrastucture Setup via Terraform
+
+### Pre-requisites
+1. Create AWS IAM User with admin permission and create security credentials: [AWS IAM](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials?section=IAM_credentials)
+
+2. Setup aws access and secret credentials
+    ```bash
+    ## Configure access and secret keys
+    aws configure --profile kodekloud
+
+    ## Export Profile and Region
+    export AWS_PROFILE=kodekloud
+    export AWS_REGION='us-east-1'
+    ```
+
+3. Create s3 backend bucket
+    ```bash
+    aws s3api create-bucket --bucket yatharth-terraform-state-bucket
+    ```
+
+4. Create dynamodb table
+    ```bash
+    aws dynamodb create-table --table-name terraform-locking --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --deletion-protection-enabled
+    ```
+
+### Provision Infra
+1. Setup VPC and EC2 instance
+    ```bash
+    tf init -reconfigure
+    tf plan
+    tf apply
+    ```
+
+### Deprovision Infra and cleanup
+1. Cleanup terraform
+    ```bash
+    tf destroy
+    ```
+
+2. Cleanup s3 bucket
+    ```bash
+    aws s3 rm s3://yatharth-terraform-state-bucket --recursive
+    aws s3 rb s3://yatharth-terraform-state-bucket --force
+    ```
+
+3. Delete dynamodb table
+    ```bash
+    aws dynamodb update-table --table-name terraform-locking --no-deletion-protection-enabled
+    aws dynamodb delete-table --table-name terraform-locking
+    ```
