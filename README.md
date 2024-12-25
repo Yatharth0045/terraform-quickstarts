@@ -86,6 +86,7 @@ tf apply
 ### Provision Infra
 1. Setup VPC and EC2 instance
     ```bash
+    cd aws_networking
     tf init -reconfigure
     tf plan
     tf apply
